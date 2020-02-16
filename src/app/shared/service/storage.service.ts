@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
+// Service para comunicar com servidor(mock)
+
 @Injectable()
 export class StorageService {
   url = 'http://localhost:3000/profile';

@@ -1,3 +1,5 @@
+// Model para gravar o usuario
+
 export class User{
     
     public name: string;

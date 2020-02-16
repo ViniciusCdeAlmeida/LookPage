@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
-import { UserGuard } from ".././user.guard";
 import { Router} from '@angular/router';
+
+// Toolbar para multiplas acoes do usuario: Login, Logout e Create User
 
 @Component({
   selector: 'app-toolbar',
@@ -14,7 +15,6 @@ export class ToolbarComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private guard: UserGuard,
     private router: Router){}    
 
   openLogin() {

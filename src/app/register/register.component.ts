@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
     ){};
 
   save() {
+    // Grava o usuario se o formulario nao tiver algum campo invalido
     if (this.form.status != 'INVALID') {
       let signUpUser = {
         email: this.form.value.email,
@@ -50,6 +51,8 @@ export class RegisterComponent implements OnInit {
     this.initForm();
   }
 
+  // Inicializador do formulario
+
   private initForm() {
     this.form = this.fb.group({
       email: new FormControl(this.email, [Validators.required, Validators.compose([
@@ -67,6 +70,8 @@ export class RegisterComponent implements OnInit {
       name: new FormControl(this.name, [Validators.required, Validators.maxLength(3)])
     });
   }
+
+  // Mensagens para o validador
 
   account_validation_messages = {
     'name': [
