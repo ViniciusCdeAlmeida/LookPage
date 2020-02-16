@@ -1,0 +1,187 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+.main-div {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #636363
+}
+
+// slider
+
+.slider-header {
+  background: #fff;
+  color: #000;
+  text-align: bottom;
+  padding: 1em 0;
+}
+
+#slider {
+  background: #000;
+  border: 5px solid #eaeaea;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+  height: 320px;
+  width: 680px;
+  margin: 40px auto 0;
+  overflow: visible;
+  position: relative;
+}
+#mask {
+  overflow: hidden;
+  height: 320px;
+}
+
+/* IMAGE LIST */
+
+#slider ul {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+#slider li {
+  width: 680px;
+  height: 320px;
+  position: absolute;
+  top: -325px;
+  list-style: none;
+}
+
+#slider li.firstanimation {
+  animation: cycle 4s linear infinite;
+}
+
+#slider li.secondanimation {
+  animation: cycletwo 4s linear infinite;
+}
+
+/* ANIMATION */
+
+@keyframes cycle {
+  0% {
+    top: 0px;
+  }
+
+  
+  16% {
+    top: 0px;
+  }
+
+  /* Original Position */
+  48% {
+    top: 0px;
+    opacity: 1;
+    z-index: 0;
+  }
+
+  
+  64% {
+    top: 325px;
+    opacity: 0;
+    z-index: 0;
+  }
+
+  
+  65% {
+    top: -325px;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  80% {
+    top: -325px;
+    opacity: 0;
+    z-index: -0;
+  }
+
+  96% {
+    top: -325px;
+    opacity: 0;
+  }
+
+  
+  100% {
+    top: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes cycletwo {
+  0% {
+    top: -325px;
+    opacity: 0;
+  }
+
+  
+  48% {
+    top: -325px;
+    opacity: 0;
+  }
+
+  
+  64% {
+    top: 0px;
+    opacity: 1;
+  }
+
+  80% {
+    top: 0px;
+    opacity: 1;
+  }
+  
+  96% {
+    top: 0px;
+    opacity: 1;
+    z-index: 0;
+  }
+
+  97% {
+    top: -325px;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  100% {
+    top: -325px;
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+#slider .tooltip {
+  background: rgba(0, 0, 0, 0.7);
+  width: 300px;
+  height: 60px;
+  position: relative;
+  bottom: 75px;
+  left: -320px;
+}
+
+#slider .tooltip h1 {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 60px;
+  padding: 0 0 0 10px;
+}
+
+#slider .tooltip {
+  transition: all 0.3s ease-in-out;
+}
+
+#slider li#first:hover .tooltip,
+#slider li#second:hover .tooltip {
+  left: 0px;
+}
+
+#slider:hover li,
+#slider:hover .progress-bar {
+  animation-play-state: paused;
+}

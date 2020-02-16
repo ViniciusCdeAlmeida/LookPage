@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h3 style="text-align: right;">Home Page</h3>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end">
+      <ul fxLayout fxLayoutGap="20px">
+        <li>
+          <button mat-icon-button [matMenuTriggerFor]="auth">
+            <mat-icon>person_outline</mat-icon>
+          </button>
+          <mat-menu #auth="matMenu">
+            <button mat-menu-item (click)="openLogin()">
+              <mat-icon>arrow_forward</mat-icon>
+              <span>Login</span>
+            </button>
+            <button mat-menu-item routerLinkActive="active">
+              <mat-icon>arrow_back</mat-icon>
+              <span (click)="logout()">Logout</span>
+            </button>
+            <button mat-menu-item (click)="openRegister()">
+              <mat-icon>add</mat-icon>
+              <span>Create User</span>
+            </button>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
