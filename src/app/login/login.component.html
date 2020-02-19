@@ -3,6 +3,7 @@
     <mat-form-field>
         <input matInput
                 placeholder="Email"
+                required
                 formControlName="email">
     </mat-form-field>
  
@@ -13,12 +14,13 @@
         <input matInput
                 placeholder="Password"
                 formControlName="password"
+                required
                 type="password">
     </mat-form-field>
  
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button class="mat-raised-button"(click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary"(click)="save()">Login</button>
+    <button class="mat-raised-button"(click)="logout()">Close</button>
+    <button class="mat-raised-button mat-primary"(click)="login()">Login</button>
 </mat-dialog-actions>

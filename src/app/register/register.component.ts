@@ -1,9 +1,10 @@
-import { Component, OnInit,Inject } from '@angular/core';
-import {MatDialogRef} from  '@angular/material/dialog';
-import {Router} from '@angular/router';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-
-import {StorageService} from '../shared/service/storage.service'
+import { Angular2TokenService } from "angular2-token";
+import { StorageService } from '../shared/service/storage.service'
+import { Subscription, Observable, Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -14,41 +15,68 @@ import {StorageService} from '../shared/service/storage.service'
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
-  email:string;
-  password:string;
-  phone:string;
-  name:string;
-  passwordConfirmation:string;
+  email: string;
+  password: string;
+  phone: string;
+  name: string;
+  passwordConfirmation: string;
+  user_id: any;
+  subscritptionRegister; subscritptionUser: Subscription;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<RegisterComponent>,
-    private router: Router, 
-    private storageService: StorageService
-    ){};
+    private router: Router,
+    private storageService: StorageService,
+    private tokenAuthSerivce: Angular2TokenService
+  ) { };
 
   save() {
     // Grava o usuario se o formulario nao tiver algum campo invalido
     if (this.form.status != 'INVALID') {
-      let signUpUser = {
+      let registerUser = {
         email: this.form.value.email,
         password: this.form.value.password,
-        name: this.form.value.name,
-        phone: this.form.value.phone,
-        date_created: new Date()
+        passwordConfirmation: this.form.value.passwordConfirmation,
       };
-      this.storageService.addUser(signUpUser).subscribe(data => signUpUser);
+      let createUser = {
+        user_id: '',
+        phone: this.form.value.phone,
+        name: this.form.value.name
+      }
+      this.subscritptionRegister = this.tokenAuthSerivce.registerAccount(registerUser).subscribe(res => {
+        console.log(res)
+        console.log(res.json().data)
+        createUser.user_id = res.json().data.id
+        this.storageService.addUser(createUser).subscribe(res2 => {}
+          , err => {
+            console.log("teste")
+          }
+          , () => { });
+        // createUser.name
+      }, err => {
+        console.log("teste")
+      }, () => { });
+      // console.log(this.subscritptionRegister);
+      // this.subscritptionUser =  this.tokenAuthSerivce.registerAccount(this.subscritptionRegister).subscribe((res) => {signUpUser});
+      // this.storageService.addUser(signUpUser).subscribe(data => {signUpUser});
+
       this.close();
       this.router.navigate(['/home']);
     }
   }
-  
-    close() {
-      this.dialogRef.close();
-    }  
+
+  close() {
+    this.dialogRef.close();
+  }
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  ngOnDestroy() {
+    // this.subscritptionUser.unsubscribe;
+    this.subscritptionRegister.unsubscribe;
   }
 
   // Inicializador do formulario
@@ -57,17 +85,18 @@ export class RegisterComponent implements OnInit {
     this.form = this.fb.group({
       email: new FormControl(this.email, [Validators.required, Validators.compose([
         Validators.required,
-  	    Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])]),
       password: new FormControl(this.password, [Validators.required, Validators.minLength(6)]),
       passwordConfirmation: new FormControl(this.passwordConfirmation, [
-        Validators.required, 
+        Validators.required,
         Validators.minLength(6)
       ]),
       phone: new FormControl(this.phone, [
         Validators.pattern('^([0-9]{5})+-([0-9]{4})+$')
       ]),
-      name: new FormControl(this.name, [Validators.required, Validators.maxLength(3)])
+      name: new FormControl(this.name, [Validators.required, Validators.maxLength(3)]),
+      user_id: new FormControl(this.user_id),
     });
   }
 
@@ -94,5 +123,5 @@ export class RegisterComponent implements OnInit {
     'phone': [
       { type: 'pattern', message: 'Enter a valid phone' },
     ]
-    }
+  }
 }

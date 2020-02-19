@@ -8,15 +8,15 @@
             <mat-icon>person_outline</mat-icon>
           </button>
           <mat-menu #auth="matMenu">
-            <button mat-menu-item (click)="openLogin()">
+            <button  mat-menu-item *ngIf="!tokenGuard.userSignedIn()" routerLinkActive="active" (click)="openLogin()">
               <mat-icon>arrow_forward</mat-icon>
               <span>Login</span>
             </button>
-            <button mat-menu-item routerLinkActive="active">
+            <button mat-menu-item *ngIf="tokenGuard.userSignedIn()">
               <mat-icon>arrow_back</mat-icon>
-              <span (click)="logout()">Logout</span>
+              <span routerLink="/home" (click)="!tokenGuard.signOut()">Logout</span>
             </button>
-            <button mat-menu-item (click)="openRegister()">
+            <button mat-menu-item *ngIf="!tokenGuard.userSignedIn()" routerLinkActive="active" (click)="openRegister()">
               <mat-icon>add</mat-icon>
               <span>Create User</span>
             </button>

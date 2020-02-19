@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class StorageService {
-  url = 'http://localhost:3000/profile';
+  private url: string = 'http://localhost:3000/api/v1/person';
 
   constructor(private http: HttpClient) { }
   
@@ -14,7 +14,7 @@ export class StorageService {
     return this.http.post(this.url, user).pipe(map(res => res));
   }
 
-  getUser(userPwd,userEml){
-    return this.http.get(this.url + '?password=' + userPwd + '&email=' + userEml);
+  getUser(userId){
+    return this.http.get(this.url, userId).pipe(map(res => res));
   }
 }

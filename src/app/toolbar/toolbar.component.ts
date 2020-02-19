@@ -3,6 +3,9 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { Router} from '@angular/router';
+import { UserGuard } from "../user.guard";
+
+import { Angular2TokenService } from "angular2-token";
 
 // Toolbar para multiplas acoes do usuario: Login, Logout e Create User
 
@@ -15,7 +18,11 @@ export class ToolbarComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private router: Router){}    
+    private router: Router,
+    private guard: UserGuard,
+    public tokenGuard: Angular2TokenService){}
+  
+  auth = this.guard
 
   openLogin() {
 
@@ -37,8 +44,10 @@ export class ToolbarComponent implements OnInit {
   }
 
   logout(){
+    
     this.router.navigate(['/home']);
   }
+  
   ngOnInit(): void {
   }
 
