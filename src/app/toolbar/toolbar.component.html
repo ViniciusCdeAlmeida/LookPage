@@ -12,9 +12,9 @@
               <mat-icon>arrow_forward</mat-icon>
               <span>Login</span>
             </button>
-            <button mat-menu-item *ngIf="tokenGuard.userSignedIn()">
+            <button mat-menu-item *ngIf="tokenGuard.userSignedIn()" (click)="tokenGuard.signOut()" routerLink="/home">
               <mat-icon>arrow_back</mat-icon>
-              <span routerLink="/home" (click)="!tokenGuard.signOut()">Logout</span>
+              <span>Logout</span>
             </button>
             <button mat-menu-item *ngIf="!tokenGuard.userSignedIn()" routerLinkActive="active" (click)="openRegister()">
               <mat-icon>add</mat-icon>
