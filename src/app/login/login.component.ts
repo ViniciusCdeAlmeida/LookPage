@@ -51,7 +51,6 @@ export class LoginComponent implements OnInit {
           let idUser = res.json().data.id;
           this.storageService.getUser(idUser).subscribe((resUsr: any) => {
             this.users = resUsr;
-            console.log(this.users);
             this.userService.setUsers(this.users);
           });
           this.signInUser;

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from "./home/home.component";
 import { PageComponent } from "./page/page.component";
 
-import { UserGuard } from "./user.guard";
+import { UserGuard } from "./user.service";
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},

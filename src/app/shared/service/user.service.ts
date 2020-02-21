@@ -18,13 +18,11 @@ export class UserService {
     
     addUser(user: User) {
         this.users.push(user);
-        this.userChanged.next(this.users.slice());
+        this.userChanged.next(this.users);
     }
 
     setUsers(user: User[]) {
-      console.log(user)
       this.users = user;
-      console.log(this.users)
-      this.userChanged.next(this.users.slice());
+      this.userChanged.next(this.users);
     }
   }

@@ -18,7 +18,7 @@ import { RegisterComponent } from './register/register.component';
 import { PageComponent } from './page/page.component';
 import { UserService } from './shared/service/user.service';
 import { StorageService } from './shared/service/storage.service'
-
+import { UserGuard } from './user.service'
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -68,7 +68,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSliderModule,
     MatSlideToggleModule,
   ],
-  providers: [Angular2TokenService,UserService,StorageService],
+  providers: [Angular2TokenService,UserService,StorageService,UserGuard],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent]
 })

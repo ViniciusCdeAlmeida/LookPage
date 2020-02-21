@@ -10,10 +10,12 @@ export class UserGuard implements CanActivate {
 
   constructor(
     private authTokenService:Angular2TokenService,
-    private router:Router){}
+    private router:Router
+    ){}
 
-  canActivate(){
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if(this.authTokenService.userSignedIn()){
+      console.log(this.authTokenService)
       return true;
     }
     else{

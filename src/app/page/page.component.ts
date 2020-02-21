@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { UserService } from '../shared/service/user.service';
-import { UserGuard } from "../user.guard";
+// import { UserGuard } from "./user.guard";
 
 // Pagina para redirecionamento
 
@@ -15,11 +15,11 @@ export class PageComponent implements OnInit {
 
   users: any = [];
   subscriptionUser: Subscription;
-  auth = this.guard
+  // auth = this.guard
 
   constructor(
-    private userService: UserService,
-    private guard: UserGuard
+    private userService: UserService
+    // private guard: UserGuard
   ) { }
 
   ngOnInit(): void {
