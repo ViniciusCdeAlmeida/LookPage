@@ -11,6 +11,8 @@ export class UserService {
     private users: User[] = [];
   
     getUser() {
+      console.log("getUsers")
+      console.log(this.users)
       return this.users;
     }
     
@@ -20,7 +22,9 @@ export class UserService {
     }
 
     setUsers(user: User[]) {
+      console.log(user)
       this.users = user;
-      this.userChanged.next(this.users);
+      console.log(this.users)
+      this.userChanged.next(this.users.slice());
     }
   }

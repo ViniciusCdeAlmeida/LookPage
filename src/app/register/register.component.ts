@@ -42,27 +42,22 @@ export class RegisterComponent implements OnInit {
       let createUser = {
         user_id: '',
         phone: this.form.value.phone,
-        name: this.form.value.name
+        name: this.form.value.name,
+        user: ''
       }
       this.subscritptionRegister = this.tokenAuthSerivce.registerAccount(registerUser).subscribe(res => {
-        console.log(res)
-        console.log(res.json().data)
-        createUser.user_id = res.json().data.id
-        this.storageService.addUser(createUser).subscribe(res2 => {}
+        createUser.user_id = res.json().data.id;
+        this.storageService.addUser(createUser).subscribe(res2 => { }
           , err => {
-            console.log("teste")
+            console.log("ERROR RAILS");
           }
           , () => { });
-        // createUser.name
       }, err => {
-        console.log("teste")
-      }, () => { });
-      // console.log(this.subscritptionRegister);
-      // this.subscritptionUser =  this.tokenAuthSerivce.registerAccount(this.subscritptionRegister).subscribe((res) => {signUpUser});
-      // this.storageService.addUser(signUpUser).subscribe(data => {signUpUser});
-
+        console.log("ERROR ANGULAR")
+      }, () => {
+        this.router.navigate(['/page']);
+      });
       this.close();
-      this.router.navigate(['/home']);
     }
   }
 

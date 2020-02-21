@@ -45,19 +45,15 @@ export class LoginComponent implements OnInit {
       email: this.form.value.email,
       password: this.form.value.password
     };
-
-    // this.storageService.getUser(signInUser.password,signInUser.email).subscribe(
-    //   (res: any) => {
-    //     this.userService.setUsers(res);
-    //     this.users = res;
-    //     if (res !== undefined) {
-    //       this.close();
-    //       this.router.navigate(['/page']);
-    //     }
-    //   });
-
-    this.tokenAuthSerivce.signIn(signInUser).subscribe(
+    
+    this.subscriptionUser = this.tokenAuthSerivce.signIn(signInUser).subscribe(
         res => {
+          let idUser = res.json().data.id;
+          this.storageService.getUser(idUser).subscribe((resUsr: any) => {
+            this.users = resUsr;
+            console.log(this.users);
+            this.userService.setUsers(this.users);
+          });
           this.signInUser;
           this.router.navigate(['/page']);
           this.logout();
