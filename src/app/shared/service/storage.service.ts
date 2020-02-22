@@ -7,7 +7,7 @@ import { UserService } from './user.service';
 
 @Injectable()
 export class StorageService {
-  private url: string = 'http://localhost:3000/person';
+  private url: string = 'http://lookpage-teracodeback.herokuapp.com/person';
 
   constructor(private http: HttpClient,
     private userService: UserService) { }
