@@ -11,8 +11,6 @@ export class UserService {
     private users: User[] = [];
   
     getUser() {
-      console.log("getUsers")
-      console.log(this.users)
       return this.users;
     }
     
